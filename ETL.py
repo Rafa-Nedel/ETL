@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
 ## Limpeza: ##
 
-    #print(df.loc[1:3, 'ocorrencia_cidade'])
+    #print(df.loc[1:3, 'ocorrencia_cidade']) -- é possível usar iloc, que aí a busca é por índice, podendo buscar posição negativa ou entre periodos [10:15]
     #print(df.loc[[10, 27, 13]])
     print(df.codigo_ocorrencia.is_unique)
     #df.set_index('codigo_ocorrencia', inplace=True)
@@ -47,3 +47,8 @@ if __name__ == '__main__':
 
 ## transformação ##
 
+    print(df.loc[df.ocorrencia_uf.isnull()])
+    # print(df.count()) # conta os valores não nulos
+
+    filtro = df.total_recomendacoes > 10
+    print(df.loc[filtro, 'ocorrencia_cidade'])
