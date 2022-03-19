@@ -3,10 +3,11 @@ import pandera as pa
 
 
 df = pd.read_csv('ocorrencia.csv', sep=';', parse_dates=['ocorrencia_dia'], dayfirst=True)
-print(df.head(10))
+print(df)
 
 schema = pa.DataFrameSchema(
-    columns={"codigo_ocorrencia": pa.Column(pa.Int),
+    columns={"codigo" : pa.Column(pa.Int, required=False),
+             "codigo_ocorrencia": pa.Column(pa.Int),
              "codigo_ocorrencia2" : pa.Column(pa.Int),
              "ocorrencia_classificacao" : pa.Column(pa.String),
              "ocorrencia_cidade" : pa.Column(pa.String),
