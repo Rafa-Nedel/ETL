@@ -13,8 +13,8 @@ if __name__ == '__main__':
                  "codigo_ocorrencia2" : pa.Column(pa.Int),
                  "ocorrencia_classificacao" : pa.Column(pa.String),
                  "ocorrencia_cidade" : pa.Column(pa.String),
-                 "ocorrencia_uf" : pa.Column(pa.String, pa.Check.str_length(2, 2)),
-                 "ocorrencia_aerodromo" : pa.Column(pa.String),
+                 "ocorrencia_uf" : pa.Column(pa.String, pa.Check.str_length(2, 2), nullable=True),
+                 "ocorrencia_aerodromo" : pa.Column(pa.String, nullable=True),
                  "ocorrencia_dia" : pa.Column(pa.DateTime),
                  "ocorrencia_hora" : pa.Column(pa.String, pa.Check.str_matches(r'^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])(:[0-5][0-9])?$'),
                                                nullable=True),
@@ -35,9 +35,15 @@ if __name__ == '__main__':
     print(df.loc[0, 'ocorrencia_aerodromo'])
 
     df.loc[df.ocorrencia_aerodromo == '****', ['ocorrencia_aerodromo']] = pd.NA
-
     df.replace(['**', '###!', '####', '*****', 'NULL'], pd.NA, inplace=True)
+
     print(df.loc[:, 'ocorrencia_aerodromo'])
     print(df.isna().sum())
     # df.fillna('A', inplace=True) -- altera todos os dados NA
-    # df.dropna -- tira a linha inteira que tenha um elemento NA
+    # df.dropna() -- tira a linha inteira que tenha um elemento NA
+    # df.dropduplicates() -- tira linhas duplicadas
+
+    print('-' * 50)
+
+## transformação ##
+
