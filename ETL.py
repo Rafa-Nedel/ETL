@@ -40,3 +40,4 @@ if __name__ == '__main__':
     print(df.loc[:, 'ocorrencia_aerodromo'])
     print(df.isna().sum())
     # df.fillna('A', inplace=True) -- altera todos os dados NA
+    # df.dropna -- tira a linha inteira que tenha um elemento NA
