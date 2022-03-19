@@ -23,7 +23,9 @@ if __name__ == '__main__':
     schema.validate(df)
     print(df.dtypes)
     print('-' * 50)
+
 ## Limpeza: ##
+
     #print(df.loc[1:3, 'ocorrencia_cidade'])
     #print(df.loc[[10, 27, 13]])
     print(df.codigo_ocorrencia.is_unique)
