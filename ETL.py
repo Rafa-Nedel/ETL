@@ -31,5 +31,12 @@ if __name__ == '__main__':
     print(df.codigo_ocorrencia.is_unique)
     #df.set_index('codigo_ocorrencia', inplace=True)
     #df.reset_index(drop=True, inplace=True)
-    df.loc[0, 'ocorrencia_aerodromo'] = 'N/D'
+    df.loc[0, 'ocorrencia_aerodromo'] = '<NA>'
     print(df.loc[0, 'ocorrencia_aerodromo'])
+
+    df.loc[df.ocorrencia_aerodromo == '****', ['ocorrencia_aerodromo']] = pd.NA
+
+    df.replace(['**', '###!', '####', '*****', 'NULL'], pd.NA, inplace=True)
+    print(df.loc[:, 'ocorrencia_aerodromo'])
+    print(df.isna().sum())
+    # df.fillna('A', inplace=True) -- altera todos os dados NA
