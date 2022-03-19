@@ -50,5 +50,24 @@ if __name__ == '__main__':
     print(df.loc[df.ocorrencia_uf.isnull()])
     # print(df.count()) # conta os valores não nulos
 
-    filtro = df.total_recomendacoes > 10
+    filtro = df.total_recomendacoes == 8
+    filtro2 = df.ocorrencia_classificacao == 'INCIDENTE GRAVE'
     print(df.loc[filtro, 'ocorrencia_cidade'])
+    print(df.loc[filtro2])
+    print(filtro & filtro2, '- e -')
+    print(filtro | filtro2, '- ou -')
+
+    filtro3 = df.ocorrencia_cidade.str[0] == 'C' #cidade que comecem com a letrar C
+    print(df.loc[filtro3, 'ocorrencia_cidade'])
+
+    filtro4 = df.ocorrencia_cidade.str.contains('PASSO')
+    print(df.loc[filtro4, 'ocorrencia_cidade'])
+
+    df['ocorrencia_dia_hora'] = pd.to_datetime(df.ocorrencia_dia.astype(str) + ' ' + df.ocorrencia_hora)
+    print(df.loc[:, 'ocorrencia_dia_hora'])
+
+    sul = (df.ocorrencia_dia.dt.year > 2015) & (df.ocorrencia_uf.isin(['PR', 'SC', 'RS']))
+    dfsul = df.loc[sul]
+    print(dfsul)
+    print(dfsul.groupby(['ocorrencia_classificacao']).size())
+    print(dfsul.groupby(['ocorrencia_cidade']).size().sort_values(ascending=False))
